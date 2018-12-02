@@ -1,0 +1,27 @@
+name:                advent-of-code
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/oskarek/advent-of-code#readme
+license:             BSD3
+author:              Oskar Ek
+maintainer:          oek@kth.se
+copyright:           Copyright (c) 2017 Oskar Ek
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - parsec
+  - transformers
+
+executables:
+  day1-part1:
+    source-dirs:      src/day1
+    main:             Day1Part1.hs
+
+  day1-part2:
+    source-dirs:      src/day1
+    main:             Day1Part2.hs

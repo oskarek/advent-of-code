@@ -1,0 +1,49 @@
+-- This file has been generated from package.yaml by hpack version 0.28.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 8c3a6165934b1ab2579b0622b445bcecf4a99bc5687c68695e75e25299bef372
+
+name:           advent-of-code
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/oskarek/advent-of-code#readme
+author:         Oskar Ek
+maintainer:     oek@kth.se
+copyright:      Copyright (c) 2017 Oskar Ek
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+extra-source-files:
+    README.md
+
+executable day1-part1
+  main-is: Day1Part1.hs
+  other-modules:
+      Day1Part2
+      InputParser
+      Paths_advent_of_code
+  hs-source-dirs:
+      src/day1
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , parsec
+    , transformers
+  default-language: Haskell2010
+
+executable day1-part2
+  main-is: Day1Part2.hs
+  other-modules:
+      Day1Part1
+      InputParser
+      Paths_advent_of_code
+  hs-source-dirs:
+      src/day1
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , parsec
+    , transformers
+  default-language: Haskell2010
