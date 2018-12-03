@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3b9bca50e804cb8e4d0a8687d1680d8543f77f85bab806f69587cfcc10d50389
+-- hash: fee5848346e9f6c6fb3fc9361f3729c4ce87a68f39abd51f4be421e9d38265b1
 
 name:           advent-of-code
 version:        0.1.0.0
@@ -71,6 +71,38 @@ executable day2-part2
       Paths_advent_of_code
   hs-source-dirs:
       src/day2
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , parsec
+    , transformers
+  default-language: Haskell2010
+
+executable day3-part1
+  main-is: Day3Part1.hs
+  other-modules:
+      ClaimParser
+      ClaimUtils
+      Day3Part2
+      Paths_advent_of_code
+  hs-source-dirs:
+      src/day3
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , parsec
+    , transformers
+  default-language: Haskell2010
+
+executable day3-part2
+  main-is: Day3Part2.hs
+  other-modules:
+      ClaimParser
+      ClaimUtils
+      Day3Part1
+      Paths_advent_of_code
+  hs-source-dirs:
+      src/day3
   build-depends:
       base >=4.7 && <5
     , containers
