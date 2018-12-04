@@ -16,28 +16,18 @@ dependencies:
   - containers
   - parsec
   - transformers
+  - optparse-applicative
+
+library:
+  source-dirs: src
 
 executables:
-  day1-part1:
-    source-dirs:      src/day1
-    main:             Day1Part1.hs
-
-  day1-part2:
-    source-dirs:      src/day1
-    main:             Day1Part2.hs
-
-  day2-part1:
-    source-dirs:      src/day2
-    main:             Day2Part1.hs
-
-  day2-part2:
-    source-dirs:      src/day2
-    main:             Day2Part2.hs
-
-  day3-part1:
-    source-dirs:      src/day3
-    main:             Day3Part1.hs
-
-  day3-part2:
-    source-dirs:      src/day3
-    main:             Day3Part2.hs
+  advent-of-code-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - advent-of-code

@@ -1,10 +1,13 @@
 {-# LANGUAGE TupleSections #-}
-module ClaimUtils where
+module Day3.ClaimUtils where
 
-import           ClaimParser         (Claim (Claim))
 import           Control.Applicative (liftA2)
 import           Data.Map            (Map, filterWithKey, fromListWith, keys,
                                       (!))
+
+data Claim = Claim { claimID :: Int
+                   , pos     :: (Int, Int)
+                   , size    :: (Int, Int) } deriving (Eq, Show)
 
 type Point = (Int, Int)
 

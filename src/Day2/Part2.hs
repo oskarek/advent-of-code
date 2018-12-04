@@ -1,7 +1,6 @@
-module Main where
+module Day2.Part2 (solve) where
 
 import           Data.List (tails)
-import           IDParser  (getIDs)
 
 -- | Get number of diffing elements in two lists
 diff :: Eq a => ([a], [a]) -> Int
@@ -19,6 +18,5 @@ groupSimilar = filter ((==1) . diff) . combos
 getCommons :: Eq a => ([a], [a]) -> [a]
 getCommons (xs, ys) = map fst . filter (uncurry (==)) $ zip xs ys
 
-main :: IO ()
-main = map getCommons . groupSimilar <$> getIDs
-          >>= print
+solve :: [String] -> String
+solve = unlines . map getCommons . groupSimilar
