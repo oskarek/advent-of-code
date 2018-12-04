@@ -1,14 +1,16 @@
 {-# LANGUAGE TupleSections #-}
 module ClaimUtils where
 
-import           ClaimParser (Claim (Claim))
-import           Data.Map    (Map, filterWithKey, fromListWith, keys, (!))
+import           ClaimParser         (Claim (Claim))
+import           Control.Applicative (liftA2)
+import           Data.Map            (Map, filterWithKey, fromListWith, keys,
+                                      (!))
 
 type Point = (Int, Int)
 
 -- | Get the points covered by a claim
 claimToPoints :: Claim -> [Point]
-claimToPoints (Claim _ (x,y) (w,h)) = [x..x+w-1] >>= \x -> map (x,) [y..y+h-1]
+claimToPoints (Claim _ (x,y) (w,h)) = liftA2 (,) [x..x+w-1] [y..y+h-1]
 
 -- | Get how many claims are covering each point
 pointFreqs :: [Claim] -> Map Point Int
