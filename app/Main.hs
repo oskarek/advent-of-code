@@ -10,11 +10,13 @@ import qualified Types               as T
 import qualified Day1.Day1           as Day1
 import qualified Day2.Day2           as Day2
 import qualified Day3.Day3           as Day3
+import qualified Day4.Day4           as Day4
 
 solvers :: Map Integer T.Solver
 solvers = M.fromList [ (1, Day1.solve)
                      , (2, Day2.solve)
                      , (3, Day3.solve)
+                     , (4, Day4.solve)
                      ]
 
 printSolutions :: (String, String) -> IO ()
