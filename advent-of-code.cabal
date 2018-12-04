@@ -2,12 +2,12 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8b069b0f0cda6c3b2a2f2e7786ef0c89cab47434fbbf23d69c1359eaae964064
+-- hash: adb7783b1ef1cca23aabd2190ff3d91a021c7caba53079f4ad3870b4e1e46bb7
 
 name:           advent-of-code
 version:        0.1.0.0
 category:       Web
-homepage:       https://github.com/oskarek/advent-of-code#readme
+homepage:       https://github.com/oskarek/advent-of-code-2018#readme
 author:         Oskar Ek
 maintainer:     oek@kth.se
 copyright:      Copyright (c) 2017 Oskar Ek

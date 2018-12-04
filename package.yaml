@@ -2,7 +2,7 @@ name:                advent-of-code
 version:             0.1.0.0
 #synopsis:
 #description:
-homepage:            https://github.com/oskarek/advent-of-code#readme
+homepage:            https://github.com/oskarek/advent-of-code-2018#readme
 license:             BSD3
 author:              Oskar Ek
 maintainer:          oek@kth.se
