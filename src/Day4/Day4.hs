@@ -32,8 +32,8 @@ buildGuardMap = build 0 0
                                                  (M.singleton guard (freqs [start .. time-1]))
                                                  (build guard 0 recs)
 
--- | Get the maximum key and value pair by comparing the keys by the given function
-maxPairBy :: Ord k' => (k -> k') -> M.Map a k -> (a, k)
+-- | Get the maximum key and value pair by comparing the values by the given function
+maxPairBy :: Ord a' => (a -> a') -> M.Map k a -> (k, a)
 maxPairBy f = maximumBy (comparing (f . snd)) . M.toList
 
 getMaxGuardOn :: ([Int] -> Int) -> [Record] -> Int
