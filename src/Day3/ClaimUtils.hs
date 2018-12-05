@@ -1,7 +1,8 @@
 module Day3.ClaimUtils where
 
 import           Control.Applicative (liftA2)
-import           Data.Map            (Map, filterWithKey, keys, (!))
+import           Data.Map            (Map, (!))
+import qualified Data.Map            as M
 import           Utils               (freqs)
 
 data Claim = Claim { claimID :: Int
@@ -20,7 +21,7 @@ pointFreqs = freqs . concatMap claimToPoints
 
 -- | Get all points that are covered by at least two claims
 overlappedPoints :: [Claim] -> [Point]
-overlappedPoints = keys . filterWithKey (\_ n -> n > 1) . pointFreqs
+overlappedPoints = M.keys . M.filter (> 1) . pointFreqs
 
 -- | Filter out only the claims that are not overlapping with any other claim
 nonOverlapping :: [Claim] -> [Claim]
