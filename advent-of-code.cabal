@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: adb7783b1ef1cca23aabd2190ff3d91a021c7caba53079f4ad3870b4e1e46bb7
+-- hash: 86edba71caa3a0d4407a53faff7637d638750c5d76e2b2210025f92f0ea04daf
 
 name:           advent-of-code
 version:        0.1.0.0
@@ -29,8 +29,10 @@ library
       Day3.ClaimUtils
       Day3.Day3
       Day4.Day4
+      Day5.Day5
       Parsing
       Types
+      Utils
   other-modules:
       Paths_advent_of_code
   hs-source-dirs:
