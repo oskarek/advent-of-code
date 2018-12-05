@@ -1,4 +1,3 @@
-{-# LANGUAGE TupleSections #-}
 module Day4.Day4 (solve) where
 
 import           Control.Applicative (liftA2, (<$))
@@ -9,6 +8,7 @@ import           Data.Ord            (comparing)
 import qualified Parsing             as P
 import           Text.Parsec         hiding (parse)
 import qualified Types               as T
+import           Utils               (freqs)
 
 data Event = BeginsShift Int | FallsAsleep | WakesUp deriving (Eq, Show)
 data Record = Record Int Event deriving (Eq, Show)
@@ -28,8 +28,9 @@ buildGuardMap = build 0 0
         build guard start (Record time event : recs) = case event of
           BeginsShift g -> build g start recs
           FallsAsleep   -> build guard time recs
-          WakesUp -> let freqs = M.fromList $ map (,1) [start .. time-1]
-                         in (M.unionWith . M.unionWith) (+) (M.singleton guard freqs) $ build guard 0 recs
+          WakesUp -> (M.unionWith . M.unionWith) (+)
+                                                 (M.singleton guard (freqs [start .. time-1]))
+                                                 (build guard 0 recs)
 
 -- | Get the maximum key and value pair by comparing the keys by the given function
 maxPairBy :: Ord k' => (k -> k') -> M.Map a k -> (a, k)

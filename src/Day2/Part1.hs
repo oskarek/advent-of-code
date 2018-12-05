@@ -1,16 +1,12 @@
-{-# LANGUAGE TupleSections #-}
 module Day2.Part1 (solve) where
 
-import           Data.Map    (Map, elems, fromListWith)
+import           Data.Map    (Map, elems)
 import           Text.Parsec (ParseError)
-
--- | Get the frequency count for each element in a list
-frequencies :: Ord a => [a] -> Map a Int
-frequencies = fromListWith (+) . map (,1)
+import           Utils       (freqs)
 
 -- | Return whether some element is repeated exactly n times
 hasNRepeat :: Ord a => Int -> [a] -> Bool
-hasNRepeat n = (n `elem`) . elems . frequencies
+hasNRepeat n = (n `elem`) . elems . freqs
 
 -- | Get the checksum number components for an ID
 idNums :: String -> (Int, Int)

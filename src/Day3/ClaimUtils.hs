@@ -1,9 +1,8 @@
-{-# LANGUAGE TupleSections #-}
 module Day3.ClaimUtils where
 
 import           Control.Applicative (liftA2)
-import           Data.Map            (Map, filterWithKey, fromListWith, keys,
-                                      (!))
+import           Data.Map            (Map, filterWithKey, keys, (!))
+import           Utils               (freqs)
 
 data Claim = Claim { claimID :: Int
                    , pos     :: (Int, Int)
@@ -17,7 +16,7 @@ claimToPoints (Claim _ (x,y) (w,h)) = liftA2 (,) [x..x+w-1] [y..y+h-1]
 
 -- | Get how many claims are covering each point
 pointFreqs :: [Claim] -> Map Point Int
-pointFreqs = fromListWith (+) . map (,1) . concatMap claimToPoints
+pointFreqs = freqs . concatMap claimToPoints
 
 -- | Get all points that are covered by at least two claims
 overlappedPoints :: [Claim] -> [Point]
