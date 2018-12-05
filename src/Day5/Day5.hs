@@ -2,12 +2,10 @@ module Day5.Day5 (solve) where
 
 import           Control.Arrow ((&&&))
 import           Data.Char     (toLower)
-import qualified Parsing       as P
-import           Text.Parsec   hiding (parse)
 import qualified Types         as T
 
-parse :: T.Parser [String]
-parse = mapM (P.parse (many anyChar))
+parse :: T.Parser String
+parse = Right . head
 
 react :: String -> String
 react = foldr (<:>) ""
@@ -21,7 +19,7 @@ removeUnit :: Char -> String -> String
 removeUnit unit = filter ((/= unit) . toLower)
 
 solve :: T.Solver
-solve = fmap ((solve1 &&& solve2) . head) . parse
+solve = fmap (solve1 &&& solve2) . parse
   where solve1 = show . length . react
         solve2 s = show . minimum $ map (length . react . flip removeUnit s)
                                         ['a' .. 'z']
