@@ -8,7 +8,7 @@ import           Data.Ord            (comparing)
 import qualified Parsing             as P
 import           Text.Parsec         hiding (parse)
 import qualified Types               as T
-import           Utils               (freqs)
+import           Utils               (freqs, maxPairBy)
 
 data Event = BeginsShift Int | FallsAsleep | WakesUp deriving (Eq, Show)
 data Record = Record Int Event deriving (Eq, Show)
@@ -31,10 +31,6 @@ buildGuardMap = build 0 0
           WakesUp -> (M.unionWith . M.unionWith) (+)
                                                  (M.singleton guard (freqs [start .. time-1]))
                                                  (build guard 0 recs)
-
--- | Get the maximum key and value pair by comparing the values by the given function
-maxPairBy :: Ord a' => (a -> a') -> M.Map k a -> (k, a)
-maxPairBy f = maximumBy (comparing (f . snd)) . M.toList
 
 getMaxGuardOn :: ([Int] -> Int) -> [Record] -> Int
 getMaxGuardOn f = uncurry (*) . second (fst . maxPairBy id) . maxPairBy (f . M.elems) . buildGuardMap
