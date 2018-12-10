@@ -19,7 +19,7 @@ parse = mapM (P.parse record) . sort
         parseTimestamp = manyTill anyChar (char ':') *> P.int <* string "] "
         parseEvent =  FallsAsleep <$ string "falls asleep"
                   <|> WakesUp <$ string "wakes up"
-                  <|> BeginsShift <$> (string "Guard #" *> P.int <* string " begins shift")
+                  <|> BeginsShift <$> (string "Guard #" *> P.int <* string "begins shift")
 
 -- | Build up a map that describes how many times each guard has been asleep, for each minute
 buildGuardMap :: [Record] -> M.Map Int (M.Map Int Int)

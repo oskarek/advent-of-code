@@ -10,7 +10,7 @@ import qualified Types              as T
 
 claim :: Parser Claim
 claim = Claim <$>
-  parseID <* string " @ " <*>
+  parseID <* string "@ " <*>
   parsePos <* string ": " <*>
   parseSize
   where parseID = char '#' *> P.int
