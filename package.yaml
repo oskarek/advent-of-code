@@ -23,6 +23,7 @@ dependencies:
   - parsec
   - transformers
   - optparse-applicative
+  - safe
 
 library:
   source-dirs: src

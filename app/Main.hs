@@ -14,6 +14,8 @@ import qualified Day3.Day3                     as Day3
 import qualified Day4.Day4                     as Day4
 import qualified Day5.Day5                     as Day5
 import qualified Day6.Day6                     as Day6
+import qualified Day7.Day7                     as Day7
+import qualified Day8.Day8                     as Day8
 
 solvers :: Map Integer T.Solver
 solvers = M.fromList
@@ -23,6 +25,8 @@ solvers = M.fromList
   , (4, Day4.solve)
   , (5, Day5.solve)
   , (6, Day6.solve)
+  , (7, Day7.solve)
+  , (8, Day8.solve)
   ]
 
 printSolutions :: (String, String) -> IO ()

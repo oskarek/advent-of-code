@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 89825a686cd5dc2fec16a2011407fcd1042fce5f6bb37c92790710cc396e01b8
+-- hash: 44fec8572b3a8c9d09ef3855af431a9113c61b2742895d55cc766fa663994440
 
 name:           advent-of-code
 version:        0.1.0.0
@@ -21,8 +21,6 @@ extra-source-files:
 library
   exposed-modules:
       Day1.Day1
-      Day1.Part1
-      Day1.Part2
       Day2.Day2
       Day2.Part1
       Day2.Part2
@@ -31,6 +29,8 @@ library
       Day4.Day4
       Day5.Day5
       Day6.Day6
+      Day7.Day7
+      Day8.Day8
       Parsing
       Types
       Utils
@@ -38,11 +38,14 @@ library
       Paths_advent_of_code
   hs-source-dirs:
       src
+  default-extensions: TupleSections
+  ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
     , containers
     , optparse-applicative
     , parsec
+    , safe
     , transformers
   default-language: Haskell2010
 
@@ -52,12 +55,14 @@ executable advent-of-code-exe
       Paths_advent_of_code
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  default-extensions: TupleSections
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       advent-of-code
     , base >=4.7 && <5
     , containers
     , optparse-applicative
     , parsec
+    , safe
     , transformers
   default-language: Haskell2010
