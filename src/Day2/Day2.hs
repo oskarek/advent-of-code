@@ -1,12 +1,12 @@
 module Day2.Day2 where
 
-import           Control.Arrow ((&&&))
-import qualified Parsing       as P
-import           Text.Parsec   hiding (parse)
-import qualified Types         as T
+import           Control.Arrow                  ( (&&&) )
+import qualified Parsing                       as P
+import           Text.Parsec             hiding ( parse )
+import qualified Types                         as T
 
-import qualified Day2.Part1    as P1
-import qualified Day2.Part2    as P2
+import qualified Day2.Part1                    as P1
+import qualified Day2.Part2                    as P2
 
 parse :: T.Parser [String]
 parse = mapM (P.parse (many1 anyChar))

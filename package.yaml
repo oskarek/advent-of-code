@@ -11,6 +11,12 @@ category:            Web
 extra-source-files:
 - README.md
 
+ghc-options:
+- -Wall
+
+default-extensions:
+- TupleSections
+
 dependencies:
   - base >= 4.7 && < 5
   - containers

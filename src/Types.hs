@@ -1,6 +1,6 @@
 module Types where
 
-import           Text.Parsec (ParseError)
+import           Text.Parsec                    ( ParseError )
 
 type ParseRes a = Either ParseError a
 type Parser a = [String] -> ParseRes a
