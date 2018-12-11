@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 44fec8572b3a8c9d09ef3855af431a9113c61b2742895d55cc766fa663994440
+-- hash: 9ad9b0e21f187d57a8ff16f8fa45cf7e1a8b4dec86b3a9b06ec80aec36f06321
 
 name:           advent-of-code
 version:        0.1.0.0
@@ -31,6 +31,7 @@ library
       Day6.Day6
       Day7.Day7
       Day8.Day8
+      Day9.Day9
       Parsing
       Types
       Utils
@@ -43,8 +44,10 @@ library
   build-depends:
       base >=4.7 && <5
     , containers
+    , lens
     , optparse-applicative
     , parsec
+    , pointedlist
     , safe
     , transformers
   default-language: Haskell2010
@@ -61,8 +64,10 @@ executable advent-of-code-exe
       advent-of-code
     , base >=4.7 && <5
     , containers
+    , lens
     , optparse-applicative
     , parsec
+    , pointedlist
     , safe
     , transformers
   default-language: Haskell2010

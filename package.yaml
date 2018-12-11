@@ -24,6 +24,8 @@ dependencies:
   - transformers
   - optparse-applicative
   - safe
+  - pointedlist
+  - lens
 
 library:
   source-dirs: src
