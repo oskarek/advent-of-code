@@ -17,10 +17,7 @@ import           Data.Set                       ( Set
                                                 , (\\)
                                                 )
 import           Safe                           ( headMay )
-import           Data.List                      ( sort
-                                                , nub
-                                                , partition
-                                                )
+import           Data.List                      ( partition )
 import           Data.Char                      ( ord )
 
 newtype Step = Step Char deriving (Eq, Ord)
@@ -45,46 +42,45 @@ buildMap = M.fromListWith (<>) . addEmpties . (map . fmap) S.singleton
     let empties = uncurry (flip (\\)) . (S.fromList *** mconcat) $ unzip steps
     in  steps ++ map (, S.empty) (S.toList empties)
 
-nextSteps :: Map Step (Set Step) -> [Step]
-nextSteps = M.keys . M.filter null
+nextSteps :: Map Step (Set Step) -> Set Step
+nextSteps = M.keysSet . M.filter null
 
-clearStep :: Step -> Map Step (Set Step) -> Map Step (Set Step)
-clearStep s = M.filterWithKey (\k _ -> k /= s) . (M.map . S.filter) (/= s)
+clearSteps :: Foldable t => t Step -> Map Step (Set Step) -> Map Step (Set Step)
+clearSteps = flip (foldr clearStep)
+ where
+  clearStep s = M.filterWithKey (\k _ -> k /= s) . (M.map . S.filter) (/= s)
 
 mapToSteps :: Map Step (Set Step) -> [Step]
 mapToSteps = evalState steps
  where
-  steps = headMay . nextSteps <$> get >>= maybe (pure []) addStep
-  addStep step = modify (clearStep step) >> (step :) <$> steps
+  steps = S.toAscList . nextSteps <$> get >>= addSteps
+  addSteps [] = pure []
+  addSteps ss = modify (clearSteps ss) >> (ss ++) <$> steps
 
 data StepPeriod = SP { step :: Step, start :: Int, end :: Int }
 
-totDuration :: [StepPeriod] -> Int
-totDuration = maybe (-1) end . headMay
-
-toWorkPeriod :: Int -> Step -> StepPeriod
-toWorkPeriod start step = SP { step  = step
-                             , start = start
-                             , end   = start + duration step - 1
-                             }
-  where duration (Step c) = ord c - 4
+toStepPeriod :: Int -> Step -> StepPeriod
+toStepPeriod _start s@(Step c) =
+  SP { step = s, start = _start, end = _start + ord c - 5 }
 
 mapToDuration :: Map Step (Set Step) -> Int
-mapToDuration = go (replicate 5 []) [] 0
+mapToDuration = go (replicate 5 []) S.empty 0
  where
   go periods accSteps time m =
-    let
-      (available, busy) = partition ((< time) . totDuration) periods
-      finished          = mapMaybe (fmap step . headMay) available
-      inProgress        = mapMaybe (fmap step . headMay) busy
-      m'                = foldr clearStep m finished
-      nexts = filter (`notElem` inProgress) . nub $ nextSteps m' ++ accSteps
-      (now, later)      = splitAt (length available) $ sort nexts
-      newWorkPeriods    = map (toWorkPeriod time) now
-      available' =
-        zipWith (++) (map (: []) newWorkPeriods ++ repeat []) available
-    in
-      if M.null m' then time else go (available' ++ busy) later (time + 1) m'
+    let (available, busy      ) = partition ((< time) . endTime) periods
+        (finished , inProgress) = (lastSteps *** lastSteps) (available, busy)
+        m'                      = clearSteps finished m
+        nexts                   = (nextSteps m' <> accSteps) \\ inProgress
+        (now, later)            = splitAt (length available) $ S.toAscList nexts
+        newStepPeriods          = map (toStepPeriod time) now
+        available'              = newStepPeriods `appendStepsTo` available
+    in  if M.null m'
+          then time
+          else go (available' ++ busy) (S.fromList later) (time + 1) m'
+
+  lastSteps = S.fromList . mapMaybe (fmap step . headMay)
+  appendStepsTo work = zipWith (++) (map (: []) work ++ repeat [])
+  endTime = maybe (-1) end . headMay
 
 solve :: T.Solver
 solve = fmap (solve1 &&& solve2) . parse
