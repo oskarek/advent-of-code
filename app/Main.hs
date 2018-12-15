@@ -17,18 +17,20 @@ import qualified Day6.Day6                     as Day6
 import qualified Day7.Day7                     as Day7
 import qualified Day8.Day8                     as Day8
 import qualified Day9.Day9                     as Day9
+import qualified Day10.Day10                   as Day10
 
 solvers :: Map Integer T.Solver
 solvers = M.fromList
-  [ (1, Day1.solve)
-  , (2, Day2.solve)
-  , (3, Day3.solve)
-  , (4, Day4.solve)
-  , (5, Day5.solve)
-  , (6, Day6.solve)
-  , (7, Day7.solve)
-  , (8, Day8.solve)
-  , (9, Day9.solve)
+  [ (1 , Day1.solve)
+  , (2 , Day2.solve)
+  , (3 , Day3.solve)
+  , (4 , Day4.solve)
+  , (5 , Day5.solve)
+  , (6 , Day6.solve)
+  , (7 , Day7.solve)
+  , (8 , Day8.solve)
+  , (9 , Day9.solve)
+  , (10, Day10.solve)
   ]
 
 printSolutions :: (String, String) -> IO ()
